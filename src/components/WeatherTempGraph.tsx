@@ -24,7 +24,6 @@ export const WeatherTempGraph = ({filteredWeatherData, weatherModeGraph}: Weathe
      const firstCity = Object.keys(filteredWeatherData)[0]
      let isHourly = false
     const datesArr = filteredWeatherData[firstCity]?.map(item=>item.dt)
-    //console.log('datesArr',datesArr);
     
     for (const key in filteredWeatherData) {
         if(filteredWeatherData.hasOwnProperty(key))
@@ -54,10 +53,9 @@ export const WeatherTempGraph = ({filteredWeatherData, weatherModeGraph}: Weathe
             <LineChart
                 width={chartWidth}
                 height={300}
-                 //data={weatherData[firstCity]}
             >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis   dataKey="dt"  tickFormatter={(value) => isHourly ? new Date(value*1000).toLocaleTimeString([],{hour: '2-digit', minute: '2-digit'}) : new Date(value*1000).toLocaleDateString([], {day:'2-digit', month:'2-digit'})}/>
+                <XAxis  ticks={datesArr} dataKey="dt"  tickFormatter={(value) => isHourly ? new Date(value*1000).toLocaleTimeString([],{hour: '2-digit', minute: '2-digit'}) : new Date(value*1000).toLocaleDateString([], {day:'2-digit', month:'2-digit'})}/>
                 <YAxis/>
                 <Tooltip content={<CustomTooltip/>} />
                 <Legend />
